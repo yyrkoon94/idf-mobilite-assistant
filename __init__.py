@@ -5,6 +5,10 @@ from homeassistant.core import HomeAssistant
 
 from .const import DOMAIN
 
+import homeassistant.helpers.config_validation as cv
+
+CONFIG_SCHEMA = cv.config_entry_only_config_schema("idf_mobilite_assistant")
+
 
 async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     """Configurer l’intégration via YAML.
