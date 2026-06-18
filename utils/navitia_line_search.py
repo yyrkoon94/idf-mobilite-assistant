@@ -31,7 +31,6 @@ async def search_navitia_lines(api_key: str, mode: str, code: str):
     - mode "all" → /places + depth=2 → récupère toutes les lignes directement
     - autres modes → /pt_objects.
     """
-
     # -------------------------------
     # 1) MODE "ALL" → recherche globale
     # -------------------------------
