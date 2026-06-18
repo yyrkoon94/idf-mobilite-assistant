@@ -6,10 +6,9 @@ select = ["E", "F", "W", "D"]
 ignore = [
     "D203",  # no blank line before class
     "D213",  # multi-line docstring summary on first line
+    "E722",  # bare except
+    "TID252" # relative imports (nécessaire pour HA)
 ]
 
 [lint.pydocstyle]
 convention = "google"
-
-[tool.ruff]
-ignore = ["E722", "TID252"]
