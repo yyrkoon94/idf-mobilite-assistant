@@ -53,7 +53,7 @@ async def search_local_stop_areas(query: str):
 
             data = await resp.json()
 
-    except TimeoutError, aiohttp.ClientError, ValueError:
+    except (TimeoutError, aiohttp.ClientError, ValueError):
         # Timeout, erreur réseau, JSON invalide
         return {}
 

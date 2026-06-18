@@ -59,7 +59,7 @@ async def search_navitia_lines(api_key: str, mode: str, code: str):
 
                 data = await resp.json()
 
-        except TimeoutError, aiohttp.ClientError, ValueError:
+        except (TimeoutError, aiohttp.ClientError, ValueError):
             return []
         places = data.get("places", [])
 
@@ -123,7 +123,7 @@ async def search_navitia_lines(api_key: str, mode: str, code: str):
 
             data = await resp.json()
 
-    except TimeoutError, aiohttp.ClientError, ValueError:
+    except (TimeoutError, aiohttp.ClientError, ValueError):
         return []
 
     results = data.get("pt_objects", [])
