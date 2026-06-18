@@ -4,10 +4,8 @@ on:
   push:
   pull_request:
 
-permissions: {}
-
 jobs:
-  tests:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,9 +18,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
-          pip install pytest pytest-cov
-          pip install -r requirements.txt || true
+          pip install -r requirements.txt
+          pip install -e .
 
       - name: Run tests
         run: pytest --maxfail=1 --disable-warnings --cov=.

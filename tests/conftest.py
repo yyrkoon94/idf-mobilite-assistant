@@ -19,7 +19,6 @@ def find_project_root():
     - si "custom_components" est dans un parent → racine = ce parent
     - sinon → racine = parent direct du dossier tests
     """
-
     current = Path(__file__).resolve()
 
     for parent in current.parents:
