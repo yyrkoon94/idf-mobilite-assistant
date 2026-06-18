@@ -1,0 +1,89 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Integration Setup",
+        "description": "Please enter your PRIM API key to access IDFM data.",
+        "data": {
+          "api_key": "PRIM API Key"
+        }
+      },
+      "search_stop_area": {
+        "title": "Search for a Stop",
+        "description": "Enter a stop name to search in the local database.",
+        "data": {
+          "search": "Stop name"
+        }
+      },
+      "select_stop_area": {
+        "title": "Select a Stop",
+        "description": "Choose a stop from the list. You may also customize the line name (optional).",
+        "data": {
+          "selected_stop_area": "Stop",
+          "name": "Line name (optional)"
+        }
+      },
+      "create_first_entry": {
+        "title": "Creating Configuration",
+        "description": "Initializing configuration with your first line."
+      },
+      "main_menu": {
+        "title": "Main Menu",
+        "description": "What would you like to do?",
+        "data": {
+          "action": "Action"
+        }
+      },
+      "add_ligne_details": {
+        "title": "Add a Line",
+        "description": "Configure a new line to monitor.",
+        "data": {
+          "selected_stop_area": "Stop",
+          "name": "Line name (optional)"
+        }
+      },
+      "add_message": {
+        "title": "Add a Custom Message",
+        "description": "Add a message that will be displayed in associated entities.",
+        "data": {
+          "message": "Message"
+        }
+      },
+      "delete": {
+        "title": "Delete a Line",
+        "description": "Select the line you want to delete.",
+        "data": {
+          "ligne": "Line to delete"
+        }
+      },
+      "update_api": {
+        "title": "Update API Key",
+        "description": "Modify your PRIM API key.",
+        "data": {
+          "api_key": "New PRIM API Key"
+        }
+      }
+    },
+    "error": {
+      "invalid_api_key": "The provided API key is invalid.",
+      "no_results": "No stops found for this search.",
+      "unknown": "An unexpected error occurred."
+    },
+    "abort": {
+      "already_configured": "This integration is already configured.",
+      "cannot_connect": "Unable to connect to the PRIM service.",
+      "invalid_api_key": "The provided API key is invalid."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Integration Options",
+        "description": "Configure advanced settings.",
+        "data": {
+          "refresh_interval": "Refresh interval (minutes)"
+        }
+      }
+    }
+  }
+}
