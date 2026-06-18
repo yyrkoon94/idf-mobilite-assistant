@@ -1,13 +1,25 @@
-from homeassistant.helpers import entity_registry as er
+"""Étape de suppression d'une ligne ou d'un message dans le flux de configuration.
+
+Cette étape permet :
+- d'afficher toutes les lignes et messages existants,
+- de proposer un tri alphabétique,
+- de supprimer proprement l'entité Home Assistant,
+- de mettre à jour la config_entry,
+- de revenir au menu principal.
+"""
+
 import voluptuous as vol
 
-from ..const import DOMAIN
-from ..const import ICON_MAP
+from homeassistant.helpers import entity_registry as er
+
+from idf_mobilite_assistant.const import DOMAIN, ICON_MAP
 
 
 class StepDelete:
+    """Étape du flux de configuration permettant de supprimer une ligne ou un message."""
+
     async def async_step_delete(self, user_input=None):
-        """Étape de suppression d'une ligne ou d'un message."""
+        """Afficher la liste des éléments supprimables et traiter la suppression."""
 
         # Récupération des données actuelles de la config_entry
         lignes = list(self.entry.data.get("lignes", []))

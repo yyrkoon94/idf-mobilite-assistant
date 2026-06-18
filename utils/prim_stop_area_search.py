@@ -1,6 +1,17 @@
-import aiohttp
-import async_timeout
+"""Recherche locale des zones d'arrêt IDFM via l'API open data.
+
+Cette fonction interroge l’API `zones-d-arrets` et reconstruit une structure
+triée comprenant :
+- les arrêts individuels,
+- les groupes multimodaux,
+- les enfants des groupes,
+- les arrêts isolés.
+"""
+
+import asyncio
 from collections import OrderedDict
+
+import aiohttp
 
 IDFM_URL = "https://data.iledefrance-mobilites.fr/api/records/1.0/search/"
 
@@ -14,6 +25,13 @@ TYPE_MAP = {
 
 
 async def search_local_stop_areas(query: str):
+    """Rechercher des zones d'arrêt IDFM correspondant à une chaîne de recherche.
+
+    Retourne un dictionnaire ordonné contenant :
+    - les arrêts multimodaux triés,
+    - leurs enfants triés,
+    - les arrêts isolés triés.
+    """
     query = query.strip()
     if not query:
         return {}
@@ -24,13 +42,12 @@ async def search_local_stop_areas(query: str):
         "rows": 100,
     }
 
-    try:
-        async with aiohttp.ClientSession() as session:
-            with async_timeout.timeout(5):
-                async with session.get(IDFM_URL, params=params) as resp:
-                    data = await resp.json()
-    except Exception:
-        return {}
+    async with (
+        aiohttp.ClientSession() as session,
+        asyncio.timeout(5),
+        session.get(IDFM_URL, params=params) as resp,
+    ):
+        data = await resp.json()
 
     records = data.get("records", [])
     if not records:

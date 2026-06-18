@@ -1,3 +1,11 @@
+"""Fonctions utilitaires pour interroger l’API Navitia via PRIM.
+
+Ce module fournit la fonction `search_navitia_lines` permettant de rechercher
+des lignes de transport en fonction d’un mode (bus, métro, tram…) et d’un code.
+"""
+
+import asyncio
+
 import aiohttp
 
 NAVITIA_BASE_URL = "https://prim.iledefrance-mobilites.fr/marketplace/v2/navitia"
@@ -17,11 +25,11 @@ MODE_TO_NAVITIA = {
 
 
 async def search_navitia_lines(api_key: str, mode: str, code: str):
-    """
-    Recherche de lignes Navitia filtrée par mode + code.
+    """Recherche de lignes Navitia filtrée par mode + code.
+
     Version optimisée :
     - mode "all" → /places + depth=2 → récupère toutes les lignes directement
-    - autres modes → /pt_objects
+    - autres modes → /pt_objects.
     """
 
     # -------------------------------
@@ -36,36 +44,39 @@ async def search_navitia_lines(api_key: str, mode: str, code: str):
             "display_geojson": "false",
         }
 
-        async with aiohttp.ClientSession() as session:
-            async with session.get(
+        async with (
+            aiohttp.ClientSession() as session,
+            asyncio.timeout(5),
+            session.get(
                 f"{NAVITIA_BASE_URL}/places",
                 headers={"apiKey": api_key},
                 params=params,
                 ssl=False,
-            ) as resp:
-                if resp.status != 200:
-                    return []
+            ) as resp,
+        ):
+            if resp.status != 200:
+                return []
 
-                data = await resp.json()
-                places = data.get("places", [])
+            data = await resp.json()
+            places = data.get("places", [])
 
-                lines = []
+            lines = []
 
-                for obj in places:
-                    if obj.get("embedded_type") == "stop_area":
-                        sa = obj["stop_area"]
-                        for line in sa.get("lines", []):
-                            lines.append(line)
+            for obj in places:
+                if obj.get("embedded_type") == "stop_area":
+                    sa = obj["stop_area"]
+                    for line in sa.get("lines", []):
+                        lines.append(line)
 
-                    elif obj.get("embedded_type") == "line":
-                        lines.append(obj["line"])
+                elif obj.get("embedded_type") == "line":
+                    lines.append(obj["line"])
 
-                    elif obj.get("embedded_type") == "route":
-                        lines.append(obj["route"]["line"])
+                elif obj.get("embedded_type") == "route":
+                    lines.append(obj["route"]["line"])
 
-                # Déduplication
-                unique = {line["id"]: line for line in lines}
-                return list(unique.values())
+            # Déduplication
+            unique = {line["id"]: line for line in lines}
+            return list(unique.values())
 
     # -------------------------------
     # 2) AUTRES MODES → /pt_objects
@@ -94,31 +105,31 @@ async def search_navitia_lines(api_key: str, mode: str, code: str):
         "count": "500",
     }
 
-    async with aiohttp.ClientSession() as session:
-        async with session.get(
+    async with (
+        aiohttp.ClientSession() as session,
+        session.get(
             f"{NAVITIA_BASE_URL}/pt_objects",
             headers={"apiKey": api_key},
             params=params,
             ssl=False,
-        ) as resp:
-            if resp.status != 200:
-                return []
+        ) as resp,
+    ):
+        if resp.status != 200:
+            return []
 
-            data = await resp.json()
-            results = data.get("pt_objects", [])
+        data = await resp.json()
+        results = data.get("pt_objects", [])
 
-            # Filtrage par mode
-            if mode == "noctilien":
-                return [
-                    r["line"]
-                    for r in results
-                    if r["line"]["code"].upper().startswith("N")
-                ]
-
-            allowed = MODE_TO_NAVITIA[mode]
-
+        # Filtrage par mode
+        if mode == "noctilien":
             return [
-                r["line"]
-                for r in results
-                if any(a in r["line"]["commercial_mode"]["name"] for a in allowed)
+                r["line"] for r in results if r["line"]["code"].upper().startswith("N")
             ]
+
+        allowed = MODE_TO_NAVITIA[mode]
+
+        return [
+            r["line"]
+            for r in results
+            if any(a in r["line"]["commercial_mode"]["name"] for a in allowed)
+        ]
