@@ -20,6 +20,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Disable root __init__.py
+        run: |
+          if [ -f "__init__.py" ]; then mv __init__.py __init__.py.disabled; fi
+
       # 🔥 Recréer la structure Home Assistant (SANS copier tests/)
       - name: Create HA-like structure
         run: |
