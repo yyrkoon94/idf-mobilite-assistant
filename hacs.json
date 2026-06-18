@@ -1,6 +1,6 @@
 {
   "name": "IDF Mobilité Assistant",
-  "content_in_root": false,
+  "content_in_root": true,
   "domains": ["idf_mobilite_assistant"],
   "country": ["FR"],
   "homeassistant": "2026.6.0",

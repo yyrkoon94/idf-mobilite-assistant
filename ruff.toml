@@ -1,0 +1,12 @@
+line-length = 120
+target-version = "py312"
+
+[lint]
+select = ["E", "F", "W", "D"]
+ignore = [
+    "D203",  # no blank line before class
+    "D213",  # multi-line docstring summary on first line
+]
+
+[lint.pydocstyle]
+convention = "google"

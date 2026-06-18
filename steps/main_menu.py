@@ -1,11 +1,6 @@
 import voluptuous as vol
 
-from ..const import (
-    MENU_ADD_LIGNE,
-    MENU_ADD_MESSAGE,
-    MENU_DELETE,
-    MENU_UPDATE_API,
-)
+from ..const import MENU_ADD_LIGNE, MENU_ADD_MESSAGE, MENU_DELETE, MENU_UPDATE_API
 
 
 class StepMainMenu:

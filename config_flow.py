@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from homeassistant import config_entries
-from homeassistant.core import HomeAssistant
 
 from .const import DOMAIN
 from .steps.delete import StepDelete
