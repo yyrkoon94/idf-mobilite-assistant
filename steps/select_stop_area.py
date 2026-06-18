@@ -1,13 +1,29 @@
-import voluptuous as vol
+"""Étape de sélection d’un arrêt IDFM dans le flux de configuration.
+
+Cette étape affiche les arrêts trouvés lors de la recherche précédente
+et permet à l’utilisateur d’en sélectionner un, puis de nommer la ligne
+associée avant de l’ajouter à la configuration.
+"""
+
 import uuid
-from ..const import CONF_NAME
-from ..const import ICON_MAP
+
+import voluptuous as vol
+
+from ..const import CONF_NAME, ICON_MAP  # noqa: TID252
 
 
 class StepSelectStopArea:
-    async def async_step_select_stop_area(self, user_input=None):
-        """Page 3 : sélection de l'arrêt + nom de la ligne."""
+    """Étape du flux permettant de sélectionner un arrêt IDFM."""
 
+    _search_results: dict | None = None
+
+    async def async_step_select_stop_area(self, user_input=None):
+        """Afficher la liste des arrêts trouvés et traiter la sélection.
+
+        - Si `user_input` est fourni : validation du choix, création ou mise à jour
+            d’une ligne dans la config_entry.
+        - Sinon : affichage du menu déroulant listant les arrêts disponibles.
+        """
         results = self._search_results  # dict {ref: {label, arr_type, name, town}}
         errors = {}
 

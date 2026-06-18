@@ -1,10 +1,29 @@
-import voluptuous as vol
-from ..const import ICON_MAP, MODE_LABELS
+"""Étape de sélection d’une ligne Navitia dans le flux de configuration.
+
+Cette étape affiche les lignes trouvées lors de la recherche précédente
+et permet à l’utilisateur d’en sélectionner une pour créer ou mettre à jour
+un capteur de messages.
+"""
+
 import uuid
+
+import voluptuous as vol
+
+from ..const import ICON_MAP, MODE_LABELS  # noqa: TID252
 
 
 class SelectLineStep:
+    """Étape du flux permettant de sélectionner une ligne Navitia."""
+
+    _line_results: list | None = None
+
     async def async_step_select_line(self, user_input=None):
+        """Afficher la liste des lignes trouvées et traiter la sélection.
+
+        - Si `user_input` est fourni : validation du choix, création ou mise à jour
+          du capteur correspondant.
+        - Sinon : affichage du menu listant les lignes disponibles.
+        """
         errors = {}
 
         results = getattr(self, "_line_results", None)
@@ -24,11 +43,8 @@ class SelectLineStep:
             if line:
                 # Extraction des infos utiles
                 line_id = line["id"]
-                line_name = line.get("name", "")
                 code = line.get("code", "")
                 cm = line.get("commercial_mode", {}).get("name", "")
-                color = line.get("color")
-                text_color = line.get("text_color")
 
                 # CAS 1 : première entrée
                 if self.entry is None:
@@ -82,7 +98,7 @@ class SelectLineStep:
         options = {"__back__": "⬅️ Retour à la recherche"}
 
         # Mapping inverse MODE_LABELS → clé
-        MODE_BY_LABEL = {
+        mode_by_label = {
             value.split(" ", 1)[1].lower(): key
             for key, value in MODE_LABELS.items()
             if key != "all"
@@ -105,7 +121,7 @@ class SelectLineStep:
                     return mode_key
 
             # fallback MODE_LABELS
-            for label, key in MODE_BY_LABEL.items():
+            for label, key in mode_by_label.items():
                 if label in cm:
                     return key
 

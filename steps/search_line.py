@@ -1,10 +1,31 @@
+"""Étape de recherche d’une ligne Navitia dans le flux de configuration.
+
+Cette étape permet à l’utilisateur de saisir :
+- un mode de transport (bus, métro, tram…),
+- un code de ligne (ex : 38, T1, N15),
+puis interroge l’API Navitia via PRIM pour récupérer les lignes correspondantes.
+"""
+
 import voluptuous as vol
-from ..utils.navitia_line_search import search_navitia_lines
-from ..const import MODE_LABELS, PLACEHOLDERS
+
+from ..const import MODE_LABELS, PLACEHOLDERS  # noqa: TID252
+from ..utils.navitia_line_search import search_navitia_lines  # noqa: TID252
 
 
 class SearchLineStep:
+    """Étape du flux permettant de rechercher une ligne Navitia."""
+
+    _mode: str | None = None
+    _code: str | None = None
+    _line_results: list | None = None
+
     async def async_step_search_line(self, user_input=None):
+        """Afficher le formulaire de recherche et traiter la validation.
+
+        - Si `user_input` est fourni : validation du mode + code, appel Navitia,
+          puis passage à l’étape de sélection si des résultats existent.
+        - Sinon : affichage du formulaire avec valeurs par défaut ou précédentes.
+        """
         errors = {}
 
         if user_input is not None:

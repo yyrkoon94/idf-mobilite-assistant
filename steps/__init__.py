@@ -1,1 +1,1 @@
-# vide pour l’instant, juste pour marquer le package
+"""Package des étapes du flux de configuration IDF Mobilité Assistant."""

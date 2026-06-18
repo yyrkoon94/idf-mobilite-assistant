@@ -1,12 +1,36 @@
+"""Étape principale du flux de configuration IDF Mobilité Assistant.
+
+Ce module contient le menu principal permettant à l’utilisateur de :
+- ajouter une ligne,
+- ajouter un message,
+- supprimer un élément existant,
+- mettre à jour la clé API.
+"""
+
 import voluptuous as vol
 
-from ..const import MENU_ADD_LIGNE, MENU_ADD_MESSAGE, MENU_DELETE, MENU_UPDATE_API
+from ..const import (  # noqa: TID252
+    MENU_ADD_LIGNE,
+    MENU_ADD_MESSAGE,
+    MENU_DELETE,
+    MENU_UPDATE_API,
+)
 
 
 class StepMainMenu:
-    async def async_step_main_menu(self, user_input=None):
-        """Menu principal pour gérer lignes et messages."""
+    """Menu principal du flux de configuration.
 
+    Cette étape sert de hub central : elle redirige l’utilisateur vers les
+    différentes sous‑étapes (ajout de ligne, ajout de message, suppression,
+    mise à jour de la clé API).
+    """
+
+    async def async_step_main_menu(self, user_input=None):
+        """Afficher le menu principal et traiter la sélection utilisateur.
+
+        Si `user_input` est fourni, l’étape correspondante est exécutée.
+        Sinon, un formulaire listant les actions disponibles est affiché.
+        """
         if user_input is not None:
             choice = user_input["menu"]
 

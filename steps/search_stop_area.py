@@ -1,10 +1,27 @@
-from ..utils.prim_stop_area_search import search_local_stop_areas
+"""Étape de recherche d’un arrêt IDFM dans le flux de configuration.
+
+Cette étape permet à l’utilisateur de saisir un nom d’arrêt, puis interroge
+l’API open data IDFM pour récupérer les zones d’arrêt correspondantes.
+"""
+
 import voluptuous as vol
+
+from ..utils.prim_stop_area_search import search_local_stop_areas  # noqa: TID252
 
 
 class SearchStopAreaStep:
+    """Étape du flux permettant de rechercher un arrêt IDFM."""
+
+    _query: str | None = None
+    _search_results: dict | None = None
+
     async def async_step_search_stop_area(self, user_input=None):
-        """Étape de recherche d'un arrêt."""
+        """Afficher le formulaire de recherche et traiter la validation.
+
+        - Si `user_input` est fourni : validation de la requête, appel API,
+          puis passage à l’étape suivante si des résultats existent.
+        - Sinon : affichage du formulaire avec la dernière valeur saisie.
+        """
         errors = {}
 
         if user_input is not None:

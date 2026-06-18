@@ -163,7 +163,7 @@ async def search_local_stop_areas(query: str):
     # 3B) Arrêts isolés triés
     # zdaid appartenant à un vrai multimodal
     multimodal_zdaids = set()
-    for zdacid, info in groups.items():
+    for info in groups.values():
         if len(info["zdaids"]) >= 2:
             multimodal_zdaids.update(info["zdaids"])
 

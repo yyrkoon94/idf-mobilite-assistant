@@ -12,7 +12,7 @@ import voluptuous as vol
 
 from homeassistant.helpers import entity_registry as er
 
-from idf_mobilite_assistant.const import DOMAIN, ICON_MAP
+from ..const import DOMAIN, ICON_MAP  # noqa: TID252
 
 
 class StepDelete:
@@ -20,7 +20,6 @@ class StepDelete:
 
     async def async_step_delete(self, user_input=None):
         """Afficher la liste des éléments supprimables et traiter la suppression."""
-
         # Récupération des données actuelles de la config_entry
         lignes = list(self.entry.data.get("lignes", []))
         messages = list(self.entry.data.get("messages", []))
@@ -31,13 +30,13 @@ class StepDelete:
         entries: list[tuple[str, str]] = []
 
         # --- LIGNES ---
-        for i, l in enumerate(lignes):
-            arr_type = l.get("arr_type")
+        for i, ligne in enumerate(lignes):
+            arr_type = ligne.get("arr_type")
             icon = ICON_MAP.get(arr_type, "❓")
 
-            name = l.get("name")
-            stop_name = l.get("stop_name")
-            town = l.get("town", "")
+            name = ligne.get("name")
+            stop_name = ligne.get("stop_name")
+            town = ligne.get("town", "")
             if name:
                 full_name = f"{name}"
             else:
@@ -75,7 +74,7 @@ class StepDelete:
         # TRI ALPHABÉTIQUE GLOBAL (en ignorant l'icône)
         # ---------------------------------------------------------
         def sort_key(entry: tuple[str, str]) -> str:
-            key, label = entry
+            _, label = entry
             # On enlève l'icône + l'espace initial, s'il y en a un
             parts = label.split(" ", 1)
             return parts[1] if len(parts) == 2 else label
@@ -88,7 +87,7 @@ class StepDelete:
         choices = {"__back__": "⬅️ Retour"}
 
         # Dictionnaire final pour vol.In
-        choices.update({key: label for key, label in entries})
+        choices.update(dict(entries))
 
         # ---------------------------------------------------------
         # TRAITEMENT DE LA SUPPRESSION (après choix utilisateur)

@@ -1,9 +1,25 @@
+"""Étape de mise à jour de la clé API dans le flux de configuration.
+
+Cette étape permet à l’utilisateur de modifier la clé API utilisée par
+l’intégration, puis recharge proprement la config_entry.
+"""
+
 import voluptuous as vol
 
 
 class StepUpdateApi:
+    """Étape du flux permettant de mettre à jour la clé API."""
+
+    _last_api_key: str | None = None
+
     async def async_step_update_api_key(self, user_input=None):
-        """Mise à jour de l'API Key."""
+        """Afficher le formulaire de mise à jour et traiter la validation.
+
+        - Si `user_input` est fourni : validation de la clé, mise à jour de la
+          config_entry, puis rechargement de l’intégration.
+        - Sinon : affichage du formulaire avec la dernière valeur saisie ou la
+          clé actuelle.
+        """
         errors = {}
 
         # API Key actuelle (si existante)

@@ -1,11 +1,28 @@
+"""Première étape du flux de configuration IDF Mobilité Assistant.
+
+Cette étape demande la clé API si aucune configuration n’existe encore.
+Si une config_entry est déjà présente, l’utilisateur est redirigé
+directement vers le menu principal.
+"""
+
 import voluptuous as vol
-from ..const import CONF_API_KEY
+
+from ..const import CONF_API_KEY  # noqa: TID252
 
 
 class StepUser:
-    async def async_step_user(self, user_input=None):
-        """Première étape : saisie de l'API key ou accès au menu si déjà configuré."""
+    """Étape initiale du flux : saisie de la clé API."""
 
+    api_key: str | None = None
+    entry: object | None = None
+
+    async def async_step_user(self, user_input=None):
+        """Afficher le formulaire de saisie de la clé API ou accéder au menu.
+
+        - Si une config_entry existe déjà : redirection immédiate vers le menu.
+        - Si `user_input` est fourni : validation et passage à l’étape suivante.
+        - Sinon : affichage du formulaire de saisie.
+        """
         # Si une entrée existe déjà → on saute directement au menu principal
         existing = self._async_current_entries()
         if existing:
