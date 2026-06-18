@@ -8,10 +8,5 @@
   "dependencies": [],
   "codeowners": ["@yyrkoon94"],
   "iot_class": "cloud_polling",
-  "config_flow": true,
-  "platforms": ["sensor"],
-  "translations": "translations",
-  "dashboard_cards": {
-    "idf_mobilite": "custom:idf-mobilite-card"
-  }
+  "config_flow": true
 }

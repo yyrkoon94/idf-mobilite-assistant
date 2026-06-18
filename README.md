@@ -1,7 +1,6 @@
 # IDF Mobilité Assistant
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=flat-square&logo=HomeAssistantCommunityStore&logoColor=white)](https://github.com/hacs/integration)
-[![release](https://img.shields.io/github/v/release/yyrkoon94/idf-mobilite-assistant?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/releases)
 [![companion_badge](https://img.shields.io/badge/Companion%20Integration-IDF%20Mobilité%20Card-5A4FCF?style=flat-square&logo=homeassistant&logoColor=white)](https://github.com/yyrkoon94/lovelace-idf-mobilite)
 [![ha_integration](https://img.shields.io/badge/Home%20Assistant-Integration-03A9F4?style=flat-square&logo=homeassistant&logoColor=white)](https://www.home-assistant.io/)
 [![prim_api](https://img.shields.io/badge/Made%20for-IDFM%20PRIM%20API-0078D4?style=flat-square)](https://prim.iledefrance-mobilites.fr/)
@@ -11,7 +10,7 @@
 [![Tests](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/tests.yaml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/tests.yaml)
 [![Validate](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/validate.yaml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/validate.yaml)
 
-[![Release](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/release.yml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/release.yaml)
+[![release](https://img.shields.io/github/v/release/yyrkoon94/idf-mobilite-assistant?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/releases)
 [![Last commit](https://img.shields.io/github/last-commit/yyrkoon94/idf-mobilite-assistant/main?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/commits/main)
 [![Issues](https://img.shields.io/github/issues/yyrkoon94/idf-mobilite-assistant?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/issues)
 [![Stars](https://img.shields.io/github/stars/yyrkoon94/idf-mobilite-assistant?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/stargazers)
