@@ -10,3 +10,6 @@ ignore = [
 
 [lint.pydocstyle]
 convention = "google"
+
+[tool.ruff]
+ignore = ["E722", "TID252"]
