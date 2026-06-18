@@ -1,32 +1,21 @@
 # IDF Mobilité Assistant
 
-<!-- HACS -->
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=flat-square&logo=HomeAssistantCommunityStore&logoColor=white)](https://github.com/hacs/integration)
-
-<!-- Release -->
 [![release](https://img.shields.io/github/v/release/yyrkoon94/idf-mobilite-assistant?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/releases)
-
-<!-- Downloads -->
-[![downloads](https://img.shields.io/github/downloads/yyrkoon94/idf-mobilite-assistant/total?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/releases)
-
-<!-- Issues -->
-[![issues](https://img.shields.io/github/issues/yyrkoon94/idf-mobilite-assistant?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/issues)
-
-<!-- Companion Integration -->
 [![companion_badge](https://img.shields.io/badge/Companion%20Integration-IDF%20Mobilité%20Card-5A4FCF?style=flat-square&logo=homeassistant&logoColor=white)](https://github.com/yyrkoon94/lovelace-idf-mobilite)
-
-<!-- Home Assistant Integration -->
 [![ha_integration](https://img.shields.io/badge/Home%20Assistant-Integration-03A9F4?style=flat-square&logo=homeassistant&logoColor=white)](https://www.home-assistant.io/)
-
-<!-- Lovelace Ready -->
-[![lovelace_ready](https://img.shields.io/badge/Lovelace-Ready-FFCA28?style=flat-square&logo=homeassistant&logoColor=white)](https://www.home-assistant.io/lovelace)
-
-<!-- Made for IDFM / PRIM API -->
 [![prim_api](https://img.shields.io/badge/Made%20for-IDFM%20PRIM%20API-0078D4?style=flat-square)](https://prim.iledefrance-mobilites.fr/)
 
-<!-- License -->
-[![license](https://img.shields.io/github/license/yyrkoon94/idf-mobilite-assistant?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/blob/main/LICENSE)
+[![hassfest](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/hassfest.yml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/hassfest.yml)
+[![Lint](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/lint.yml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/lint.yml)
+[![Tests](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/tests.yml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/tests.yml)
+[![Validate](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/validate.yml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/validate.yml)
 
+[![Release](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/release.yml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/release.yml)
+[![Last commit](https://img.shields.io/github/last-commit/yyrkoon94/idf-mobilite-assistant/main?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/commits/main)
+[![Issues](https://img.shields.io/github/issues/yyrkoon94/idf-mobilite-assistant?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/issues)
+[![Stars](https://img.shields.io/github/stars/yyrkoon94/idf-mobilite-assistant?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/stargazers)
+[![license](https://img.shields.io/github/license/yyrkoon94/idf-mobilite-assistant?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/blob/main/LICENSE)
 [![made_in_idf](https://img.shields.io/badge/Made%20in-%C3%8Ele--de--France-E1000F?style=flat-square&logo=france&logoColor=white)](https://www.iledefrance.fr/)
 
 
