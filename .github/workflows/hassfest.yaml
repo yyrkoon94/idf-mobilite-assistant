@@ -16,10 +16,10 @@ jobs:
       - name: Create HA-like structure
         run: |
           mkdir -p custom_components/idf_mobilite_assistant
-          mv -r steps custom_components/idf_mobilite_assistant/
-          mv -r utils custom_components/idf_mobilite_assistant/
-          mv const.py custom_components/idf_mobilite_assistant/
-          mv config_flow.py custom_components/idf_mobilite_assistant/
-          mv sensor.py custom_components/idf_mobilite_assistant/
-          mv __init__.py custom_components/idf_mobilite_assistant/
-          mv manifest.json custom_components/idf_mobilite_assistant/
+          cp -r steps custom_components/idf_mobilite_assistant/
+          cp -r utils custom_components/idf_mobilite_assistant/
+          cp const.py custom_components/idf_mobilite_assistant/
+          cp config_flow.py custom_components/idf_mobilite_assistant/
+          cp sensor.py custom_components/idf_mobilite_assistant/
+          cp __init__.py custom_components/idf_mobilite_assistant/
+          cp manifest.json custom_components/idf_mobilite_assistant/
