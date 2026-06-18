@@ -1,0 +1,88 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configuration de l'intégration",
+        "description": "Veuillez saisir votre clé API PRIM pour accéder aux données IDFM.",
+        "data": {
+          "api_key": "Clé API PRIM"
+        }
+      },
+      "search_stop_area": {
+        "title": "Rechercher un arrêt",
+        "description": "Saisissez au moins 3 lettres pour rechercher un arrêt (ex : 'Nation', 'Gare de Lyon').",
+        "data": {
+            "search": "Rechercher un arrêt"
+        },
+        "error": {
+            "query_too_short": "Veuillez saisir au moins 3 caractères.",
+            "no_results": "Aucun arrêt trouvé pour cette recherche."
+        }
+      },
+      "select_stop_area": {
+        "title": "Sélection de l'arrêt",
+        "description": "Choisissez un arrêt dans la liste. Vous pouvez également personnaliser le nom de la ligne (optionnel).",
+        "data": {
+          "selected_stop_area": "Arrêt",
+          "name": "Nom de la ligne (optionnel)"
+        }
+      },
+      "main_menu": {
+        "title": "Menu principal",
+        "description": "Que souhaitez-vous faire ?",
+        "data": {
+          "action": ""
+        }
+      },
+      "add_message": {
+        "title": "Ajouter un message personnalisé",
+        "description": "Ajoutez un message qui sera affiché dans les entités associées.",
+        "data": {
+          "message": "Message"
+        }
+      },
+      "delete": {
+        "title": "Supprimer une ligne",
+        "description": "Sélectionnez la ligne que vous souhaitez supprimer.",
+        "data": {
+          "ligne": "Ligne à supprimer"
+        }
+      },
+      "update_api": {
+        "title": "Mettre à jour la clé API",
+        "description": "Modifiez votre clé API PRIM.",
+        "data": {
+          "api_key": "Nouvelle clé API PRIM"
+        }
+      }
+    },
+    "error": {
+      "invalid_api_key": "La clé API fournie est invalide.",
+      "no_results": "Aucun arrêt trouvé pour cette recherche.",
+      "unknown": "Une erreur inattendue est survenue."
+    },
+    "abort": {
+      "already_configured": "Cette intégration est déjà configurée.",
+      "cannot_connect": "Impossible de se connecter au service PRIM.",
+      "invalid_api_key": "La clé API fournie est invalide."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options de l'intégration",
+        "description": "Configurez les paramètres avancés.",
+        "data": {
+          "refresh_interval": "Intervalle de rafraîchissement (minutes)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "idf_mobilite": {
+        "card": "custom:idf-mobilite-card"
+      }
+    }
+  }
+}
