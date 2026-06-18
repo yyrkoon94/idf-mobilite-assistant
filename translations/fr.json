@@ -13,10 +13,6 @@
         "description": "Saisissez au moins 3 lettres pour rechercher un arrêt (ex : 'Nation', 'Gare de Lyon').",
         "data": {
             "search": "Rechercher un arrêt"
-        },
-        "error": {
-            "query_too_short": "Veuillez saisir au moins 3 caractères.",
-            "no_results": "Aucun arrêt trouvé pour cette recherche."
         }
       },
       "select_stop_area": {
@@ -59,7 +55,8 @@
     "error": {
       "invalid_api_key": "La clé API fournie est invalide.",
       "no_results": "Aucun arrêt trouvé pour cette recherche.",
-      "unknown": "Une erreur inattendue est survenue."
+      "unknown": "Une erreur inattendue est survenue.",
+      "query_too_short": "Veuillez saisir au moins 3 caractères."
     },
     "abort": {
       "already_configured": "Cette intégration est déjà configurée.",
