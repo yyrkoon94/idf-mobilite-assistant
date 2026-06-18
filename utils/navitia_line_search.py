@@ -44,39 +44,43 @@ async def search_navitia_lines(api_key: str, mode: str, code: str):
             "display_geojson": "false",
         }
 
-        async with (
-            aiohttp.ClientSession() as session,
-            asyncio.timeout(5),
-            session.get(
-                f"{NAVITIA_BASE_URL}/places",
-                headers={"apiKey": api_key},
-                params=params,
-                ssl=False,
-            ) as resp,
-        ):
-            if resp.status != 200:
-                return []
+        try:
+            async with (
+                aiohttp.ClientSession() as session,
+                asyncio.timeout(5),
+                session.get(
+                    f"{NAVITIA_BASE_URL}/places",
+                    headers={"apiKey": api_key},
+                    params=params,
+                    ssl=False,
+                ) as resp,
+            ):
+                if resp.status != 200:
+                    return []
 
-            data = await resp.json()
-            places = data.get("places", [])
+                data = await resp.json()
 
-            lines = []
+        except TimeoutError, aiohttp.ClientError, ValueError:
+            return []
+        places = data.get("places", [])
 
-            for obj in places:
-                if obj.get("embedded_type") == "stop_area":
-                    sa = obj["stop_area"]
-                    for line in sa.get("lines", []):
-                        lines.append(line)
+        lines = []
 
-                elif obj.get("embedded_type") == "line":
-                    lines.append(obj["line"])
+        for obj in places:
+            if obj.get("embedded_type") == "stop_area":
+                sa = obj["stop_area"]
+                for line in sa.get("lines", []):
+                    lines.append(line)
 
-                elif obj.get("embedded_type") == "route":
-                    lines.append(obj["route"]["line"])
+            elif obj.get("embedded_type") == "line":
+                lines.append(obj["line"])
 
-            # Déduplication
-            unique = {line["id"]: line for line in lines}
-            return list(unique.values())
+            elif obj.get("embedded_type") == "route":
+                lines.append(obj["route"]["line"])
+
+        # Déduplication
+        unique = {line["id"]: line for line in lines}
+        return list(unique.values())
 
     # -------------------------------
     # 2) AUTRES MODES → /pt_objects
@@ -105,31 +109,34 @@ async def search_navitia_lines(api_key: str, mode: str, code: str):
         "count": "500",
     }
 
-    async with (
-        aiohttp.ClientSession() as session,
-        session.get(
-            f"{NAVITIA_BASE_URL}/pt_objects",
-            headers={"apiKey": api_key},
-            params=params,
-            ssl=False,
-        ) as resp,
-    ):
-        if resp.status != 200:
-            return []
+    try:
+        async with (
+            aiohttp.ClientSession() as session,
+            session.get(
+                f"{NAVITIA_BASE_URL}/pt_objects",
+                headers={"apiKey": api_key},
+                params=params,
+                ssl=False,
+            ) as resp,
+        ):
+            if resp.status != 200:
+                return []
 
-        data = await resp.json()
-        results = data.get("pt_objects", [])
+            data = await resp.json()
 
-        # Filtrage par mode
-        if mode == "noctilien":
-            return [
-                r["line"] for r in results if r["line"]["code"].upper().startswith("N")
-            ]
+    except TimeoutError, aiohttp.ClientError, ValueError:
+        return []
 
-        allowed = MODE_TO_NAVITIA[mode]
+    results = data.get("pt_objects", [])
 
-        return [
-            r["line"]
-            for r in results
-            if any(a in r["line"]["commercial_mode"]["name"] for a in allowed)
-        ]
+    # Filtrage par mode
+    if mode == "noctilien":
+        return [r["line"] for r in results if r["line"]["code"].upper().startswith("N")]
+
+    allowed = MODE_TO_NAVITIA[mode]
+
+    return [
+        r["line"]
+        for r in results
+        if any(a in r["line"]["commercial_mode"]["name"] for a in allowed)
+    ]

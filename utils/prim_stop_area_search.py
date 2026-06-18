@@ -42,12 +42,20 @@ async def search_local_stop_areas(query: str):
         "rows": 100,
     }
 
-    async with (
-        aiohttp.ClientSession() as session,
-        asyncio.timeout(5),
-        session.get(IDFM_URL, params=params) as resp,
-    ):
-        data = await resp.json()
+    try:
+        async with (
+            aiohttp.ClientSession() as session,
+            asyncio.timeout(5),
+            session.get(IDFM_URL, params=params) as resp,
+        ):
+            if resp.status != 200:
+                return {}
+
+            data = await resp.json()
+
+    except TimeoutError, aiohttp.ClientError, ValueError:
+        # Timeout, erreur réseau, JSON invalide
+        return {}
 
     records = data.get("records", [])
     if not records:

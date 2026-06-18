@@ -110,7 +110,7 @@ class SelectLineStep:
             code = (line.get("code") or "").upper()
 
             rules = [
-                ("night_bus", lambda: code.startswith("N")),
+                ("night_bus", lambda: code.startswith("N") and "bus" in cm),
                 ("cableway", lambda: "cable" in cm or "téléph" in cm),
                 ("ter", lambda: "ter" in cm or "interc" in cm),
                 ("transilien", lambda: "transilien" in cm),
