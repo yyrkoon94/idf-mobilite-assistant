@@ -6,10 +6,10 @@
 [![ha_integration](https://img.shields.io/badge/Home%20Assistant-Integration-03A9F4?style=flat-square&logo=homeassistant&logoColor=white)](https://www.home-assistant.io/)
 [![prim_api](https://img.shields.io/badge/Made%20for-IDFM%20PRIM%20API-0078D4?style=flat-square)](https://prim.iledefrance-mobilites.fr/)
 
-[![hassfest](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/hassfest.yml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/hassfest.yml)
-[![Lint](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/lint.yml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/lint.yml)
-[![Tests](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/tests.yml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/tests.yml)
-[![Validate](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/validate.yml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/validate.yml)
+[![hassfest](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/hassfest.yaml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/hassfest.yml)
+[![Lint](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/lint.yaml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/lint.yml)
+[![Tests](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/tests.yaml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/tests.yaml)
+[![Validate](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/validate.yaml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/validate.yml)
 
 [![Release](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/release.yml/badge.svg)](https://github.com/yyrkoon94/idf-mobilite-assistant/actions/workflows/release.yml)
 [![Last commit](https://img.shields.io/github/last-commit/yyrkoon94/idf-mobilite-assistant/main?style=flat-square)](https://github.com/yyrkoon94/idf-mobilite-assistant/commits/main)

@@ -7,18 +7,14 @@ import pytest
 
 
 def find_ha_config_root():
-    """
-    Trouve automatiquement le dossier 'config/' de Home Assistant.
-    """
+    """Trouve automatiquement le dossier 'config/' de Home Assistant."""
     current = Path(__file__).resolve()
 
     for parent in current.parents:
         if (parent / "custom_components").exists():
             return parent
 
-    raise RuntimeError(
-        "Impossible de trouver le dossier config/ contenant custom_components"
-    )
+    raise RuntimeError("Impossible de trouver le dossier config/ contenant custom_components")
 
 
 ROOT = find_ha_config_root()
