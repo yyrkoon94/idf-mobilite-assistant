@@ -2,7 +2,7 @@
   "domain": "idf_mobilite_assistant",
   "name": "IDF Mobilité Assistant",
   "version": "1.0.0",
-  "documentation": "https://github.com/yyrkoon94/idf-mobilite-assistant",
+  "documentation": "https://github.com/yyrkoon94/idf-mobilite-assistant ",
   "requirements": [],
   "dependencies": [],
   "codeowners": ["@yyrkoon94"],
