@@ -7,27 +7,26 @@ import pytest
 
 
 def find_project_root():
-    """Trouve automatiquement la racine du projet.
-
-    Cas 1 : Devcontainer Home Assistant
-        /workspaces/home-assistant/config/custom_components/...
-
-    Cas 2 : GitHub Actions / repo classique
-        /home/runner/work/.../idf-mobilite-assistant/
+    """Trouve la racine du projet contenant custom_components,
+    que l'on soit :
+    - dans Home Assistant local
+    - dans GitHub Actions
+    - en local hors HA
     """
+
     current = Path(__file__).resolve()
 
-    # 1) Cas Home Assistant : chercher un dossier contenant custom_components
+    # On remonte jusqu'à 10 niveaux (large mais safe)
     for parent in current.parents:
         if (parent / "custom_components").exists():
             return parent
 
-    # 2) Cas GitHub Actions : racine du repo (dossier contenant tests/)
-    return current.parents[1]
+    raise RuntimeError("custom_components introuvable dans les parents")
 
 
 ROOT = find_project_root()
 
+# Ajoute la racine au PYTHONPATH
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 

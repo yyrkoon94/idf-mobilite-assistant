@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -18,6 +19,15 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      # 🔥 Étape clé : recréer la structure Home Assistant
+      - name: Create HA-like structure
+        run: |
+          mkdir -p custom_components/idf_mobilite_assistant
+          cp -r steps custom_components/idf_mobilite_assistant/
+          cp -r utils custom_components/idf_mobilite_assistant/
+          cp -r tests custom_components/idf_mobilite_assistant/
+          touch custom_components/idf_mobilite_assistant/__init__.py
 
       - name: Run tests
         run: pytest --maxfail=1 --disable-warnings --cov=.
