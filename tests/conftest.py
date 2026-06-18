@@ -6,30 +6,20 @@ import sys
 import pytest
 
 
-# Ajoute la racine du projet au PYTHONPATH (portable GitHub + local)
-def find_project_root():
-    """Trouve automatiquement la racine du projet.
-
-    Que l'on soit:
-    - dans un devcontainer Home Assistant
-    - dans un repo GitHub Actions
-    - en local classique.
-
-    Règle :
-    - si "custom_components" est dans un parent → racine = ce parent
-    - sinon → racine = parent direct du dossier tests
-    """
+def find_ha_config_root():
+    """Trouve automatiquement le dossier 'config/' de Home Assistant."""
     current = Path(__file__).resolve()
 
     for parent in current.parents:
         if (parent / "custom_components").exists():
             return parent
 
-    # fallback : racine du repo
-    return current.parents[1]
+    raise RuntimeError(
+        "Impossible de trouver le dossier config/ contenant custom_components"
+    )
 
 
-ROOT = find_project_root()
+ROOT = find_ha_config_root()
 
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
