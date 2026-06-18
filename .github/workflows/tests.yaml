@@ -16,9 +16,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install dependencies and run tests
-        working-directory: ${{ github.workspace }}/idf-mobilite-assistant
+      - name: Install dependencies
         run: |
           pip install -r requirements.txt
           pip install -e .
-          pytest --maxfail=1 --disable-warnings --cov=.
+
+      - name: Run tests
+        run: pytest --maxfail=1 --disable-warnings --cov=.
