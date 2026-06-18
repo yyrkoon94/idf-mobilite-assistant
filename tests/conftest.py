@@ -6,33 +6,31 @@ import sys
 import pytest
 
 
-def find_project_root():
-    """Trouve la racine du projet contenant custom_components,
-    que l'on soit :
-    - dans Home Assistant local
-    - dans GitHub Actions
-    - en local hors HA
+def find_ha_config_root():
     """
-
+    Trouve automatiquement le dossier 'config/' de Home Assistant.
+    """
     current = Path(__file__).resolve()
 
-    # On remonte jusqu'à 10 niveaux (large mais safe)
     for parent in current.parents:
         if (parent / "custom_components").exists():
             return parent
 
-    raise RuntimeError("custom_components introuvable dans les parents")
+    raise RuntimeError(
+        "Impossible de trouver le dossier config/ contenant custom_components"
+    )
 
 
-ROOT = find_project_root()
+ROOT = find_ha_config_root()
 
-# Ajoute la racine au PYTHONPATH
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 
 @pytest.fixture
 def fake_hass():
+    """Provide a minimal fake hass object for flow tests."""
+
     class FakeHass:
         class config_entries:
             @staticmethod
