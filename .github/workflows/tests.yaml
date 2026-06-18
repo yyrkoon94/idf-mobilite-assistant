@@ -20,13 +20,12 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # 🔥 Étape clé : recréer la structure Home Assistant
+      # 🔥 Recréer la structure Home Assistant (SANS copier tests/)
       - name: Create HA-like structure
         run: |
           mkdir -p custom_components/idf_mobilite_assistant
           cp -r steps custom_components/idf_mobilite_assistant/
           cp -r utils custom_components/idf_mobilite_assistant/
-          cp -r tests custom_components/idf_mobilite_assistant/
           cp const.py custom_components/idf_mobilite_assistant/
           cp config_flow.py custom_components/idf_mobilite_assistant/
           cp sensor.py custom_components/idf_mobilite_assistant/
