@@ -74,13 +74,5 @@
         }
       }
     }
-  },
-  "entity": {
-    "sensor": {
-      "idf_mobilite": {
-        "name": "IDF Mobilité",
-        "card": "custom:idf-mobilite-card"
-      }
-    }
   }
 }
