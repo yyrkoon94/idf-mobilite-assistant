@@ -41,13 +41,13 @@ def fake_hass():
 
 
 @pytest.fixture
-def flow_factory(fake_hass):
+def flow_factory(fake_hass):  # pylint: disable=redefined-outer-name
     """Return a factory that builds a testable Flow class combining a Step and FakeFlowBase."""
 
     class FakeFlowBase:
         """Minimal fake of Home Assistant ConfigFlow."""
 
-        def __init__(self):
+        def __init__(self):  # pylint: disable=home-assistant-return-type
             self.hass = fake_hass
             self.entry = None
             self.api_key = None

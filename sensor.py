@@ -83,11 +83,7 @@ async def async_setup_entry(
     # Mise à jour automatique
     scan_interval = 60
     for entity in entities:
-        entry.async_on_unload(
-            async_track_time_interval(
-                hass, entity.async_update, timedelta(seconds=scan_interval)
-            )
-        )
+        entry.async_on_unload(async_track_time_interval(hass, entity.async_update, timedelta(seconds=scan_interval)))
 
 
 # ============================================================
@@ -198,9 +194,7 @@ class PRIMLigneSensor(PRIMBaseSensor):
         self._arr_type = arr_type
         self._monitoring_ref = monitoring_ref
 
-        self._resource = (
-            "https://prim.iledefrance-mobilites.fr/marketplace/stop-monitoring"
-        )
+        self._resource = "https://prim.iledefrance-mobilites.fr/marketplace/stop-monitoring"
         self._params = {"MonitoringRef": monitoring_ref}
 
         if name:
@@ -230,6 +224,11 @@ class PRIMLigneSensor(PRIMBaseSensor):
             "rail": "mdi:train",
             "cableway": "mdi:cable-car",
         }.get(self._arr_type, "mdi:train-bus")
+
+    @property
+    def device_class(self):
+        """Defini le type de device pour afficher la proposition de carte."""
+        return "idf_mobilite"
 
     async def _update_state(self, status: str, raw: dict) -> None:
         """Mettre à jour l’état du capteur de ligne."""
@@ -280,8 +279,7 @@ class PRIMMessageSensor(PRIMBaseSensor):
         self._line_type = line_type
 
         self._resource = (
-            f"https://prim.iledefrance-mobilites.fr/marketplace/v2/navitia/"
-            f"line_reports/lines/{line_id}/line_reports"
+            f"https://prim.iledefrance-mobilites.fr/marketplace/v2/navitia/line_reports/lines/{line_id}/line_reports"
         )
 
         self._params = {
@@ -300,6 +298,11 @@ class PRIMMessageSensor(PRIMBaseSensor):
     def unique_id(self) -> str:
         """Retourner l’identifiant unique du capteur."""
         return f"{DOMAIN}_messages_{self._uuid}"
+
+    @property
+    def device_class(self):
+        """Defini le type de device pour afficher la proposition de carte."""
+        return "idf_mobilite"
 
     async def _update_state(self, status: str, raw: dict) -> None:
         """Mettre à jour l’état du capteur de messages."""
